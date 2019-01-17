@@ -1,0 +1,64 @@
+[
+  {
+    "event": {
+      "event_id": 1,
+      "participants": []
+    }
+  },
+  {
+    "event": {
+      "event_id": 1,
+      "participants": []
+    },
+    "participants": [
+      {
+
+        "registration_id": 1,
+        "event_id": 1,
+        "rsu_transaction_id": 1,
+        "transaction_id": "1",
+        "bib_num": null,
+        "chip_num": null,
+        "age": 45,
+        "registration_date": "10/21/2011 11:25",
+        "team_id": null,
+        "team_name": null,
+        "team_type_id": null,
+        "team_type": null,
+        "team_bib_num": null,
+        "last_modified": 1541337024,
+        "imported": "F",
+        "race_fee": "$22.00",
+        "offline_payment_amount": "$0.00",
+        "processing_fee": "$3.00",
+        "processing_fee_paid_by_user": "$3.00",
+        "processing_fee_paid_by_race": "$0.00",
+        "partner_fee": "$0.75",
+        "affiliate_profit": "$0.00",
+        "extra_fees": "$0.00",
+        "amount_paid": "$32.00",
+        "usatf_discount_amount_in_cents": "$0.00",
+        "usatf_discount_additional_field": null,
+        "giveaway": "M",
+        "giveaway_option_id": 1,
+        "question_responses": [
+          {
+            "question_id": "1",
+            "question_text": "Is this your first road race?",
+            "response": "No"
+          },
+          {
+            "question_id": "2",
+            "question_text": "Emergency Contact Name",
+            "response": "Dad"
+          },
+          {
+            "question_id": "3",
+            "question_text": "Emergency Contact Phone",
+            "response": null
+          }
+        ]
+      }
+    ]
+  }
+]

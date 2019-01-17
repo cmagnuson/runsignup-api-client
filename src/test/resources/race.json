@@ -1,0 +1,58 @@
+{
+  "race": {
+    "race_id": 1,
+    "name": "Sample Race",
+    "last_date": null,
+    "last_end_date": null,
+    "next_date": "03/20/2019",
+    "next_end_date": "03/20/2019",
+    "is_draft_race": "F",
+    "is_registration_open": "T",
+    "created": "12/19/2011 11:47",
+    "last_modified": "1/11/2019 01:58",
+    "description": "Sample description",
+    "url": "https://runsignup.com/Race/AB/DC/Abcd",
+    "external_race_url": null,
+    "external_results_url": null,
+    "fb_page_id": null,
+    "fb_event_id": null,
+    "address": {
+      "street": "ABC",
+      "city": "DE",
+      "state": "AZ",
+      "zipcode": "12345",
+      "country_code": "US"
+    },
+    "timezone": "America/Chicago",
+    "logo_url": null,
+    "can_use_registration_api": "F",
+    "real_time_notifications_enabled": "F",
+    "events": [
+      {
+        "event_id": 1,
+        "race_event_days_id": 12,
+        "name": "5K",
+        "details": "subject to change",
+        "start_time": "3/20/2019 09:00",
+        "end_time": null,
+        "age_calc_base_date": null,
+        "registration_opens": "12/10/2018 07:00",
+        "event_type": "running_race",
+        "distance": "5K",
+        "volunteer": "F",
+        "require_dob": "T",
+        "require_phone": "T",
+        "registration_periods": [
+          {
+            "registration_opens": "12/20/2011 07:00",
+            "registration_closes": "1/20/2018 01:59",
+            "race_fee": "$11.00",
+            "processing_fee": "$2.00"
+          }
+        ],
+        "sub_event_ids": [],
+        "giveaway": null
+      }
+    ]
+  }
+}

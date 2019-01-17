@@ -1,0 +1,2 @@
+-k=API_KEY_HERE
+-s=SECRET_HERE
