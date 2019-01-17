@@ -2,15 +2,11 @@ package com.mtecresults.runsignup.api.client.controller;
 
 import com.mtecresults.runsignup.api.client.model.ApiCredentials;
 import com.mtecresults.runsignup.api.client.model.ErrorWithRawJson;
-import com.mtecresults.runsignup.api.client.model.gson.Participant;
 import com.mtecresults.runsignup.api.client.model.gson.Race;
 import com.spencerwi.either.Either;
 import okhttp3.OkHttpClient;
 import okhttp3.mock.MockInterceptor;
 import org.junit.Test;
-
-import java.util.Collections;
-import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
 import static okhttp3.mock.ClasspathResources.resource;

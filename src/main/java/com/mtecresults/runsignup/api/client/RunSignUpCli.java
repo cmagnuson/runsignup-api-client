@@ -1,5 +1,6 @@
 package com.mtecresults.runsignup.api.client;
 
+import com.mtecresults.runsignup.api.client.controller.CsvExporter;
 import com.mtecresults.runsignup.api.client.controller.ManifestVersionProvider;
 import com.mtecresults.runsignup.api.client.controller.RunSignUpConnector;
 import com.mtecresults.runsignup.api.client.model.ApiCredentials;
@@ -8,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import picocli.CommandLine;
 
+import java.io.File;
 import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -26,10 +28,10 @@ public class RunSignUpCli implements Callable<Void> {
     @CommandLine.Option(names = { "-h", "--help" }, usageHelp = true, description = "usage help")
     private boolean helpRequested;
 
-    @CommandLine.Option(names = {"-V", "--version"}, versionHelp = true, description = "Print version info")
+    @CommandLine.Option(names = {"-V", "--version"}, versionHelp = true, description = "print version info")
     boolean versionRequested;
 
-    @CommandLine.Option(names = {"-v", "--verbose"}, description = "Verbose")
+    @CommandLine.Option(names = {"-v", "--verbose"}, description = "verbose")
     boolean verbose;
 
     @CommandLine.Option(names = {"-r", "--race"}, required=true, description = "race id")
@@ -46,6 +48,12 @@ public class RunSignUpCli implements Callable<Void> {
 
     @CommandLine.Option(names = {"-m", "--modified"}, description = "download ")
     private long modifiedAfterTimestamp = 1;
+
+    @CommandLine.Option(names = {"-f", "--file"}, description = "file to export to")
+    private File exportFile;
+
+    @CommandLine.Option(names = {"-o", "--overwrite"}, description = "overwrite existing file")
+    private boolean overwriteExisting = false;
 
     public static void main(String[] args) {
         CommandLine.call(new RunSignUpCli(), args);
@@ -71,6 +79,11 @@ public class RunSignUpCli implements Callable<Void> {
                 log.info("Last Modified Time: "+lastModified);
                 if(verbose){
                     participants.forEach(participant -> {log.info("\t"+participant);});
+                }
+                CsvExporter exporter = new CsvExporter(participants, race);
+                if(exportFile != null) {
+                    exporter.exportToFile(exportFile, overwriteExisting);
+                    log.info("Download written to file: "+exportFile.getAbsolutePath());
                 }
             });
         });
