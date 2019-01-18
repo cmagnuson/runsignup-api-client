@@ -40,3 +40,6 @@ bin/
 .DS_Store
 /captures
 .externalNativeBuild
+
+test.csv
+Test.csv

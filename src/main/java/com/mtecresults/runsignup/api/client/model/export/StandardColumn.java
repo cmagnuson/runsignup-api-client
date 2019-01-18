@@ -1,10 +1,12 @@
 package com.mtecresults.runsignup.api.client.model.export;
 
 import com.mtecresults.runsignup.api.client.model.gson.Participant;
+import lombok.Data;
 
 import java.util.function.Function;
 
-public interface Column {
-    String getName();
-    Function<Participant, String> getAccessor();
+@Data
+public class StandardColumn implements Column {
+    private final String name;
+    private final Function<Participant, String> accessor;
 }

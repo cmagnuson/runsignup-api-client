@@ -1,6 +1,8 @@
 package com.mtecresults.runsignup.api.client.controller;
 
+import com.mtecresults.runsignup.api.client.model.export.AddOnColumn;
 import com.mtecresults.runsignup.api.client.model.export.Column;
+import com.mtecresults.runsignup.api.client.model.export.ResponseColumn;
 import com.mtecresults.runsignup.api.client.model.gson.Address;
 import com.mtecresults.runsignup.api.client.model.gson.Participant;
 import com.mtecresults.runsignup.api.client.model.gson.Race;
@@ -12,7 +14,9 @@ import org.supercsv.prefs.CsvPreference;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Data
@@ -46,16 +50,27 @@ public class CsvExporter {
 
     protected List<Column> getColumns(List<Participant> participants, Race race){
         List<Column> columns = getDefaultColumns();
+        Map<String, ResponseColumn> rColumn = new HashMap<>();
+        Map<String, AddOnColumn> aColumn = new HashMap<>();
         for(Participant p: participants){
-
+            //scan participant AddOn and QuestionResponses to get all unique columns
+            for(ResponseColumn rc: p.getResponseColumns()){
+                rColumn.put(rc.getResponseId(), rc);
+            }
+            for(AddOnColumn ac: p.getAddOnColumns()){
+                aColumn.put(ac.getAddOnId(), ac);
+            }
         }
+        columns.addAll(rColumn.values());
+        columns.addAll(aColumn.values());
         return columns;
     }
 
     protected List<String> getRow(List<Column> columns, Participant p){
         return columns.stream().map(c -> {
             try {
-                return c.getAccessor().apply(p);
+                String value = c.getAccessor().apply(p);
+                return value == null ? "" : value;
             } catch (NullPointerException npe) {
                 //this field is non-existant for this participant
                 //just put a blank
@@ -68,6 +83,7 @@ public class CsvExporter {
         List<Column> defaultColumns = new ArrayList<>();
         defaultColumns.addAll(User.getDefaultColumns());
         defaultColumns.addAll(Address.getDefaultColumns());
+        defaultColumns.addAll(Participant.getDefaultColumns());
         return defaultColumns;
     }
 }
