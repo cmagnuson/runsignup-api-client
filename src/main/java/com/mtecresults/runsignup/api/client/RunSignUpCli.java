@@ -82,8 +82,10 @@ public class RunSignUpCli implements Callable<Void> {
                 }
                 CsvExporter exporter = new CsvExporter(participants, race);
                 if(exportFile != null) {
-                    exporter.exportToFile(exportFile, overwriteExisting);
-                    log.info("Download written to file: "+exportFile.getAbsolutePath());
+                    boolean success = exporter.exportToFile(exportFile, overwriteExisting);
+                    if(success){
+                        log.info("Download written to file: "+exportFile.getAbsolutePath());
+                    }
                 }
             });
         });

@@ -26,14 +26,14 @@ public class CsvExporter {
     private final List<Participant> participants;
     private final Race race;
 
-    public void exportToFile(File f, boolean overwriteIfExisting) {
+    public boolean exportToFile(File f, boolean overwriteIfExisting) {
         if(f.exists()){
             if(overwriteIfExisting){
                 f.delete();
             }
             else {
                 log.error("Unable to write to file: " + f.getAbsolutePath() + " it already exists");
-                return;
+                return false;
             }
         }
         try (CsvListWriter writer = new CsvListWriter(new BufferedWriter(new FileWriter(f)),CsvPreference.STANDARD_PREFERENCE)) {
@@ -42,9 +42,11 @@ public class CsvExporter {
             for(Participant p: participants){
                 writer.write(getRow(columns, p));
             }
+            return true;
         }
         catch (IOException io){
             log.error("Error writing to file", io);
+            return false;
         }
     }
 

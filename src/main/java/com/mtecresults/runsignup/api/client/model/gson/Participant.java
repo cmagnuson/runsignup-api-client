@@ -37,8 +37,8 @@ public class Participant {
     //only apply to active participants
     String imported;
     String giveaway;
-    List<QuestionResponse> question_responses;
-    List<ParticipantAddon> participant_addons;
+    List<QuestionResponse> question_responses = new ArrayList<>();
+    List<ParticipantAddon> participant_addons = new ArrayList<>();
 
     //only apply to removed participants
     String removed_reason;
