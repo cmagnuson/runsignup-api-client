@@ -3,10 +3,8 @@ package com.mtecresults.runsignup.api.client.controller;
 import com.mtecresults.runsignup.api.client.model.export.AddOnColumn;
 import com.mtecresults.runsignup.api.client.model.export.Column;
 import com.mtecresults.runsignup.api.client.model.export.ResponseColumn;
-import com.mtecresults.runsignup.api.client.model.gson.Address;
-import com.mtecresults.runsignup.api.client.model.gson.Participant;
-import com.mtecresults.runsignup.api.client.model.gson.Race;
-import com.mtecresults.runsignup.api.client.model.gson.User;
+import com.mtecresults.runsignup.api.client.model.export.StandardColumn;
+import com.mtecresults.runsignup.api.client.model.gson.*;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.supercsv.io.CsvListWriter;
@@ -65,6 +63,7 @@ public class CsvExporter {
         }
         columns.addAll(rColumn.values());
         columns.addAll(aColumn.values());
+        columns.add(getEventNameColumn(race));
         return columns;
     }
 
@@ -87,5 +86,17 @@ public class CsvExporter {
         defaultColumns.addAll(Address.getDefaultColumns());
         defaultColumns.addAll(Participant.getDefaultColumns());
         return defaultColumns;
+    }
+
+    protected Column getEventNameColumn(final Race race) {
+        return new StandardColumn("EventName", participant -> {
+            long eventId = participant.getEvent_id();
+            for(Event event: race.getEvents()){
+                if(event.getEvent_id() == eventId){
+                    return event.getName();
+                }
+            }
+            return "";
+        });
     }
 }
