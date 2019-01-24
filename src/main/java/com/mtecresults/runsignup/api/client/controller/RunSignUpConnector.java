@@ -53,10 +53,14 @@ public class RunSignUpConnector {
     }
 
     public Either<ErrorWithRawJson, List<Participant>> getParticipants(List<Long> eventIds) {
-        return getParticipants(eventIds, false, 1);
+        return getParticipants(eventIds, false, 0);
     }
 
     public Either<ErrorWithRawJson, List<Participant>> getParticipants(List<Long> eventIds, boolean removed, long lastModified) {
+        //RunSignUp does not do the correct >=/> comparison on last modified timestamp
+        //so increment by 1 to ensure we are only getting modified after as desired
+        lastModified++;
+
         HttpUrl.Builder urlBuilder = getDefaultUrlBuilder(creds, raceId);
         urlBuilder.addEncodedPathSegment(""+raceId);
         urlBuilder.addPathSegment(removed ? "removed-participants" : "participants");

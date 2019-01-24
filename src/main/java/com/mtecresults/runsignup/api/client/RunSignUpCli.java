@@ -47,7 +47,7 @@ public class RunSignUpCli implements Callable<Void> {
     private boolean deleted = false;
 
     @CommandLine.Option(names = {"-m", "--modified"}, description = "download ")
-    private long modifiedAfterTimestamp = 1;
+    private long modifiedAfterTimestamp = 0;
 
     @CommandLine.Option(names = {"-f", "--file"}, description = "file to export to")
     private File exportFile;
